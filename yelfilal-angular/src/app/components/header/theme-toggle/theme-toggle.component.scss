@@ -1,0 +1,91 @@
+/**
+ * Theme Toggle Styles
+ * Style pill/capsule moderne avec animations fluides
+ */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  user-select: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 2px;
+  }
+
+  // Icônes emoji
+  &__icon {
+    font-size: 1rem;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+
+    &--light {
+      opacity: 1;
+    }
+
+    &--dark {
+      opacity: 0.5;
+    }
+  }
+
+  // Track (piste du switch)
+  &__track {
+    position: relative;
+    width: 2.5rem;
+    height: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    transition: background-color 0.2s ease;
+  }
+
+  // Thumb (bouton qui glisse)
+  &__thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--color-text-white);
+    border-radius: 50%;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    // Position dark (à droite)
+    &--dark {
+      transform: translateX(1.25rem);
+    }
+  }
+}
+
+// Ajustements quand en mode dark
+:host-context([data-theme="dark"]) {
+  .theme-toggle {
+    &__icon {
+      &--light {
+        opacity: 0.5;
+      }
+
+      &--dark {
+        opacity: 1;
+      }
+    }
+
+    &__track {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}

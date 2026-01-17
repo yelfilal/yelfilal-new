@@ -1,0 +1,32 @@
+<!-- Section À propos -->
+<section class="resume-section" id="about" aria-labelledby="about-title">
+  <div class="resume-section-content" appScrollAnimation>
+    <!-- Nom complet avec nom de famille en orange -->
+    <h1 class="mb-0" id="about-title">
+      {{ personalInfo.firstName }}
+      <span class="text-primary">{{ personalInfo.lastName }}</span>
+    </h1>
+
+    <!-- Titre professionnel -->
+    <div class="subheading mb-5">{{ personalInfo.title }}</div>
+
+    <!-- Description personnelle -->
+    <p class="lead mb-5">{{ personalInfo.description }}</p>
+
+    <!-- Liens réseaux sociaux -->
+    <div class="social-icons">
+      @for (link of personalInfo.socialLinks; track link.platform) {
+        <a
+          class="social-icon"
+          [href]="link.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="link.platform"
+        >
+          <i [class]="link.icon"></i>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+

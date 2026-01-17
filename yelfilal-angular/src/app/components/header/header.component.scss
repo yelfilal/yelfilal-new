@@ -1,0 +1,29 @@
+/**
+ * Styles spécifiques au HeaderComponent
+ */
+
+// Container pour le toggle de thème (en bas de la sidebar sur desktop)
+.theme-toggle-container {
+  display: none; // Caché par défaut (mobile)
+}
+
+// Sur desktop (lg+), afficher en bas de la sidebar
+@media (min-width: 992px) {
+  .theme-toggle-container {
+    display: flex !important;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+}
+
+// Animation photo de profil - scaleIn élégant
+.img-profile {
+  animation: scaleIn 0.6s ease-out both;
+  animation-delay: 0.2s; // Petit délai pour effet séquentiel
+  transition: border-color 0.3s ease;
+}
+

@@ -1,0 +1,72 @@
+<!-- Navigation sidebar sticky - Accessibilité ARIA -->
+<nav 
+  class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" 
+  id="sideNav"
+  role="navigation"
+  aria-label="Navigation principale"
+>
+  <a class="navbar-brand js-scroll-trigger" href="#page-top">
+    <!-- Photo de profil -->
+    <span class="d-block d-lg-none">{{ personalInfo.firstName }} {{ personalInfo.lastName }}</span>
+    <span class="d-none d-lg-block">
+      <img
+        class="img-fluid img-profile rounded-circle mx-auto mb-2"
+        [src]="personalInfo.profileImage"
+        [alt]="personalInfo.firstName + ' ' + personalInfo.lastName"
+      />
+    </span>
+  </a>
+
+  <!-- Theme Toggle mobile (visible uniquement en mobile) -->
+  <div class="d-lg-none me-2">
+    <app-theme-toggle></app-theme-toggle>
+  </div>
+
+  <!-- Bouton toggle mobile -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="isMenuOpen()"
+    aria-controls="navbarResponsive"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Menu navigation -->
+  <div 
+    class="navbar-collapse" 
+    [class.collapse]="!isMenuOpen()"
+    [class.show]="isMenuOpen()"
+    id="navbarResponsive"
+  >
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#about" (click)="navigateToSection('about'); $event.preventDefault()">À propos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#experience" (click)="navigateToSection('experience'); $event.preventDefault()">Expérience</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#education" (click)="navigateToSection('education'); $event.preventDefault()">Formation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#skills" (click)="navigateToSection('skills'); $event.preventDefault()">Compétences</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#interests" (click)="navigateToSection('interests'); $event.preventDefault()">Centres d'intérêt</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#awards" (click)="navigateToSection('awards'); $event.preventDefault()">Prix &amp; Certifications</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Theme Toggle desktop (en bas de la sidebar, hors du collapse) -->
+  <div class="theme-toggle-container d-none d-lg-flex">
+    <app-theme-toggle></app-theme-toggle>
+  </div>
+
+</nav>
+

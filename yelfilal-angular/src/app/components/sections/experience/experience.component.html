@@ -1,0 +1,12 @@
+<section class="resume-section" id="experience" aria-labelledby="experience-title">
+  <div class="resume-section-content">
+    <h2 class="mb-5" id="experience-title" appScrollAnimation>Expérience</h2>
+
+    @for (exp of experiences; track exp.company; let i = $index) {
+      <div appScrollAnimation [animationDelay]="i * 100">
+        <app-experience-item [experience]="exp"></app-experience-item>
+      </div>
+    }
+  </div>
+</section>
+

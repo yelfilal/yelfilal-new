@@ -1,0 +1,20 @@
+<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+  <div class="flex-grow-1">
+    <h3 class="mb-0">{{ experience.position }}</h3>
+    <div class="subheading mb-3">{{ experience.company }}</div>
+
+    <!-- Responsabilités -->
+    <ul>
+      @for (responsibility of experience.responsibilities; track responsibility) {
+        <li>{{ responsibility }}</li>
+      }
+    </ul>
+  </div>
+
+  <!-- Dates et localisation -->
+  <div class="flex-shrink-0 text-md-end date-column">
+    <span class="text-primary">{{ experience.startDate }} - {{ experience.endDate }}</span>
+    <div class="text-muted">{{ experience.location }} - {{ experience.type }}</div>
+  </div>
+</div>
+

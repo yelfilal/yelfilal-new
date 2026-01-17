@@ -1,0 +1,14 @@
+<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+  <div class="flex-grow-1">
+    <h3 class="mb-0">{{ education.degree }}</h3>
+    <div class="subheading mb-3">{{ education.institution }}</div>
+    @if (education.distinction) {
+      <div>{{ education.distinction }}</div>
+    }
+  </div>
+  <div class="flex-shrink-0 text-md-end date-column">
+    <span class="text-primary">{{ education.startDate }} - {{ education.endDate }}</span>
+    <div class="text-muted">{{ education.location }}</div>
+  </div>
+</div>
+

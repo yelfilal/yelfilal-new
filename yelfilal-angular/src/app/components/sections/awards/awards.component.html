@@ -1,0 +1,14 @@
+<section class="resume-section" id="awards" aria-labelledby="awards-title">
+  <div class="resume-section-content">
+    <h2 class="mb-5" id="awards-title" appScrollAnimation>Prix &amp; Certifications</h2>
+
+    <ul class="fa-ul mb-0">
+      @for (award of awards; track award.name; let i = $index) {
+        <li appScrollAnimation [animationDelay]="i * 100">
+          <app-award-item [award]="award"></app-award-item>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
