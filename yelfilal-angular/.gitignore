@@ -39,3 +39,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment files (secrets - never commit)
+.env
+.env.local
+.env.*.local
+

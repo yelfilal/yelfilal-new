@@ -1,0 +1,70 @@
+# ============================================================================
+# docker-compose.yml - yelfilal-angular
+# Local development and production orchestration
+# ============================================================================
+
+
+services:
+  # --------------------------------------------------------------------------
+  # Development Service
+  # Hot-reload enabled, volumes mounted for live code changes
+  # Usage: docker-compose up angular-dev
+  # --------------------------------------------------------------------------
+  angular-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: yelfilal-angular-dev
+    ports:
+      - "4200:4200"
+    volumes:
+      # Source code - bind mount for hot-reload
+      - ./src:/app/src:cached
+      # Public assets
+      - ./public:/app/public:cached
+      # Config files (read-only)
+      - ./angular.json:/app/angular.json:ro
+      - ./tsconfig.json:/app/tsconfig.json:ro
+      - ./tsconfig.app.json:/app/tsconfig.app.json:ro
+      # Anonymous volume for node_modules (avoids Windows/Linux conflicts)
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - NG_CLI_ANALYTICS=false
+    stdin_open: true
+    tty: true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # --------------------------------------------------------------------------
+  # Production Service
+  # Standalone Nginx container with optimized static files
+  # Usage: docker-compose up angular-prod
+  # --------------------------------------------------------------------------
+  angular-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: yelfilal-angular-prod
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# Networks
+networks:
+  default:
+    name: yelfilal-network
+

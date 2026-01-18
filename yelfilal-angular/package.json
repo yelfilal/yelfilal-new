@@ -6,7 +6,18 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docker:dev": "docker-compose up angular-dev",
+    "docker:dev:build": "docker-compose up angular-dev --build",
+    "docker:prod": "docker-compose up angular-prod",
+    "docker:prod:build": "docker-compose up angular-prod --build",
+    "docker:build": "docker build --target production -t yelfilal-angular:prod .",
+    "docker:build:dev": "docker build --target development -t yelfilal-angular:dev .",
+    "docker:stop": "docker-compose down",
+    "docker:clean": "docker-compose down -v && docker system prune -f",
+    "docker:logs": "docker-compose logs -f",
+    "docker:shell": "docker-compose exec angular-dev sh",
+    "docker:rebuild": "docker-compose build --no-cache"
   },
   "private": true,
   "dependencies": {

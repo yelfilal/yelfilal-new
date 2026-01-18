@@ -1,0 +1,50 @@
+# ============================================================================
+# .dockerignore - yelfilal-angular
+# Excludes unnecessary files from Docker build context
+# ============================================================================
+
+# Dependencies (installed in container)
+node_modules/
+.npm/
+
+# Build outputs
+dist/
+.angular/
+
+# Version control
+.git/
+.gitignore
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# Environment files (secrets)
+.env
+.env.local
+.env.*.local
+
+# Test files
+coverage/
+*.spec.ts
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files (not needed inside container)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
