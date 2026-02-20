@@ -1,5 +1,5 @@
 // =============================================================================
-// YELFILAL CV - STYLES OPTIMISÉS
+// YELFILAL CV - STYLES MODERNES & "PEPS" 🔵
 // =============================================================================
 
 // =============================================================================
@@ -7,47 +7,76 @@
 // =============================================================================
 
 :root {
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8f9fa;
-  --color-bg-sidebar: #bd5d38;
+  // — Backgrounds
+  --color-bg-primary: #f0f4ff;
+  --color-bg-secondary: #e6ecf9;
+  --color-bg-sidebar: linear-gradient(160deg, #0f2b5e 0%, #1a3f7a 30%, #2563eb 100%);
+  --color-bg-sidebar-solid: #1a3f7a;
 
-  --color-text-primary: #343a40;
-  --color-text-secondary: #6c757d;
+  // — Text
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #475569;
   --color-text-white: #ffffff;
+  --color-text-muted: #94a3b8;
 
-  --color-accent: #bd5d38;
-  --color-accent-hover: #a04d2e;
-  --color-accent-light: #d48a6e;
+  // — Accents (vibrant blue)
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-light: #60a5fa;
 
-  --color-accent-rgb: 189, 93, 56;
-  --color-bg-sidebar-rgb: 189, 93, 56;
+  --color-accent-rgb: 37, 99, 235;
+  --color-bg-sidebar-rgb: 26, 63, 122;
+
+  // — Cards
+  --color-card-bg: rgba(255, 255, 255, 0.7);
+  --color-card-border: rgba(37, 99, 235, 0.08);
+  --color-card-shadow: rgba(37, 99, 235, 0.08);
+  --color-card-shadow-hover: rgba(37, 99, 235, 0.18);
+
+  // — Misc
+  --color-divider: rgba(37, 99, 235, 0.1);
+  --border-radius-card: 1rem;
+  --border-radius-pill: 50rem;
+
+  // — Gradient for inline use
+  --gradient-accent: linear-gradient(135deg, #2563eb, #60a5fa);
 }
 
 [data-theme="dark"] {
-  --color-bg-primary: #0f0f1a;
-  --color-bg-secondary: #1a1a2e;
-  --color-bg-sidebar: #1a1a2e;
+  --color-bg-primary: #0b1120;
+  --color-bg-secondary: #111827;
+  --color-bg-sidebar: linear-gradient(160deg, #0b1120 0%, #111d35 30%, #1e3a6e 100%);
+  --color-bg-sidebar-solid: #111d35;
 
-  --color-text-primary: #e8e8e8;
-  --color-text-secondary: #a0a0b0;
+  --color-text-primary: #e2e8f0;
+  --color-text-secondary: #94a3b8;
   --color-text-white: #ffffff;
+  --color-text-muted: #64748b;
 
-  --color-accent: #e07850;
-  --color-accent-hover: #ff8a65;
-  --color-accent-light: #ffab91;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+  --color-accent-light: #93c5fd;
 
-  --color-accent-rgb: 224, 120, 80;
-  --color-bg-sidebar-rgb: 26, 26, 46;
+  --color-accent-rgb: 59, 130, 246;
+  --color-bg-sidebar-rgb: 17, 29, 53;
+
+  --color-card-bg: rgba(17, 24, 39, 0.6);
+  --color-card-border: rgba(59, 130, 246, 0.1);
+  --color-card-shadow: rgba(0, 0, 0, 0.2);
+  --color-card-shadow-hover: rgba(59, 130, 246, 0.2);
+
+  --color-divider: rgba(59, 130, 246, 0.12);
 }
 
+// transition on theme change
 html {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body,
 #sideNav,
 section.resume-section {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 // =============================================================================
@@ -57,7 +86,7 @@ section.resume-section {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -68,7 +97,7 @@ section.resume-section {
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.85);
   }
   to {
     opacity: 1;
@@ -76,11 +105,26 @@ section.resume-section {
   }
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(var(--color-accent-rgb), 0.3); }
+  50% { box-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.5); }
+}
+
 .animate-on-scroll {
   opacity: 0;
-  
+
   &.animate-visible {
-    animation: fadeInUp 0.6s ease-out forwards;
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 }
 
@@ -125,19 +169,18 @@ section.resume-section {
 @import "bootstrap/scss/utilities/api";
 
 // =============================================================================
-// CV CUSTOM STYLES
+// BASE TYPOGRAPHY
 // =============================================================================
-
-// Variables SCSS
-$primary: #bd5d38;
-$gray-600: #6c757d;
-$gray-700: #495057;
-$gray-800: #343a40;
 
 body {
   padding-top: 3.375rem;
   color: var(--color-text-secondary);
   background-color: var(--color-bg-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media (min-width: 992px) {
@@ -153,72 +196,129 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 800;
+  text-transform: none; // no more harsh uppercase
   color: var(--color-text-primary);
+  letter-spacing: -0.02em;
 }
 
 h1, .h1 {
-  font-size: 6rem;
-  line-height: 1;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.05;
 }
 
 h2, .h2 {
-  font-size: 3.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3rem;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--gradient-accent);
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 }
 
 h3, .h3 {
-  font-size: 2rem;
+  font-size: 1.35rem;
+  font-weight: 700;
 }
 
 p.lead {
   font-size: 1.15rem;
   font-weight: 400;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
 }
 
 .subheading {
-  font-family: "Saira Extra Condensed", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
-  font-weight: 500;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
 }
 
 .date-column {
-  min-width: 10rem; // Largeur minimale pour alignement
-  
+  min-width: 10rem;
+
   @media (min-width: 768px) {
     min-width: 12rem;
-    white-space: nowrap; // Empêcher le wrap des dates
+    white-space: nowrap;
   }
 }
+
+// =============================================================================
+// ACCENT OVERRIDES
+// =============================================================================
 
 .text-primary {
   color: var(--color-accent) !important;
 }
 
 .bg-primary {
-  background-color: var(--color-bg-sidebar) !important;
+  background: var(--color-bg-sidebar) !important;
 }
+
+// =============================================================================
+// SIDEBAR NAVIGATION
+// =============================================================================
 
 #sideNav {
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: var(--color-bg-sidebar);
+  background: var(--color-bg-sidebar);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
 
   .navbar-nav .nav-item .nav-link {
-    font-weight: 800;
-    letter-spacing: 0.05rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-white);
-    opacity: 0.85;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 0.7;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) scaleY(0);
+      width: 3px;
+      height: 60%;
+      border-radius: 0 3px 3px 0;
+      background: var(--color-accent-light);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
     &:hover,
     &.active {
       color: var(--color-text-white);
       opacity: 1;
-      transform: translateX(3px);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(4px);
+
+      &::before {
+        transform: translateY(-50%) scaleY(1);
+      }
     }
 
     &:focus-visible {
@@ -245,6 +345,8 @@ p.lead {
     flex-direction: column;
     width: 17rem;
     height: 100vh;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 
     .navbar-brand {
       display: flex;
@@ -254,7 +356,14 @@ p.lead {
       .img-profile {
         max-width: 10rem;
         max-height: 10rem;
-        border: 0.5rem solid rgba(255, 255, 255, 0.2);
+        border: 4px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 0 30px rgba(var(--color-accent-rgb), 0.3);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 40px rgba(var(--color-accent-rgb), 0.5);
+        }
       }
     }
 
@@ -268,6 +377,7 @@ p.lead {
       .navbar-nav {
         flex-direction: column;
         width: 100%;
+        padding: 0 0.5rem;
 
         .nav-item {
           display: block;
@@ -281,6 +391,10 @@ p.lead {
   }
 }
 
+// =============================================================================
+// SOCIAL ICONS
+// =============================================================================
+
 .social-icons {
   .social-icon {
     display: inline-flex;
@@ -288,12 +402,16 @@ p.lead {
     justify-content: center;
     height: 3.5rem;
     width: 3.5rem;
-    background-color: var(--color-text-secondary);
-    color: var(--color-text-white);
-    border-radius: 100%;
+    background: var(--color-card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--color-accent);
+    border: 1px solid var(--color-card-border);
+    border-radius: 1rem;
     font-size: 1.5rem;
-    margin-right: 1.5rem;
-    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-right: 1rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px var(--color-card-shadow);
 
     &:last-child {
       margin-right: 0;
@@ -301,9 +419,11 @@ p.lead {
 
     &:hover,
     &:focus-visible {
-      background-color: var(--color-accent);
-      transform: scale(1.08);
-      box-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.4);
+      background: var(--color-accent);
+      color: var(--color-text-white);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(var(--color-accent-rgb), 0.35);
+      border-color: transparent;
     }
 
     &:focus-visible {
@@ -316,6 +436,10 @@ p.lead {
 .dev-icons {
   font-size: 3rem;
 }
+
+// =============================================================================
+// RESUME SECTIONS
+// =============================================================================
 
 section.resume-section {
   display: flex;
@@ -347,10 +471,143 @@ section.resume-section {
   }
 }
 
+// =============================================================================
+// CARD STYLE FOR EXPERIENCE / EDUCATION ITEMS
+// =============================================================================
+
+.resume-card {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--border-radius-card);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px var(--color-card-shadow);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+
+  // subtle left accent bar
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--gradient-accent);
+    border-radius: 0 4px 4px 0;
+    opacity: 0;
+    transform: scaleY(0);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--color-card-shadow-hover);
+    border-color: rgba(var(--color-accent-rgb), 0.15);
+
+    &::before {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+}
+
+// =============================================================================
+// SKILL BADGES (pills)
+// =============================================================================
+
+.skill-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  margin: 0.25rem;
+  border-radius: var(--border-radius-pill);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: var(--color-card-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--color-accent);
+  border: 1px solid var(--color-card-border);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+
+  &:hover {
+    background: var(--color-accent);
+    color: var(--color-text-white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(var(--color-accent-rgb), 0.25);
+    border-color: transparent;
+  }
+}
+
+// =============================================================================
+// AWARD / CERTIFICATION LIST
+// =============================================================================
+
+.award-card {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--color-card-border);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  .award-icon {
+    font-size: 1.2rem;
+    color: #f59e0b; // gold trophy color
+    flex-shrink: 0;
+  }
+
+  a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  &:hover {
+    transform: translateX(8px);
+    box-shadow: 0 4px 20px var(--color-card-shadow-hover);
+    border-color: rgba(var(--color-accent-rgb), 0.15);
+  }
+}
+
+// =============================================================================
+// PROFILE IMAGE
+// =============================================================================
+
 .img-profile {
   max-width: 10rem;
   border-radius: 50%;
 }
+
+// =============================================================================
+// DIVIDER (hr)
+// =============================================================================
+
+hr.m-0 {
+  border: none;
+  height: 1px;
+  background: var(--color-divider);
+  margin: 0;
+}
+
+// =============================================================================
+// RESPONSIVE HELPERS
+// =============================================================================
 
 .d-lg-none {
   @media (min-width: 992px) {
@@ -367,6 +624,10 @@ section.resume-section {
     display: block !important;
   }
 }
+
+// =============================================================================
+// FONT AWESOME LIST
+// =============================================================================
 
 .fa-ul {
   margin-left: 2.5em;
@@ -497,9 +758,12 @@ section.resume-section {
     break-inside: avoid;
   }
 
-  .resume-item {
+  .resume-item,
+  .resume-card {
     page-break-inside: avoid;
     break-inside: avoid;
+    border: none !important;
+    backdrop-filter: none !important;
   }
 
   h1, .h1 {
@@ -515,6 +779,10 @@ section.resume-section {
     margin-bottom: 0.5rem !important;
     border-bottom: 1px solid #ccc;
     padding-bottom: 0.25rem;
+
+    &::after {
+      display: none;
+    }
   }
 
   h3, .h3 {
@@ -561,4 +829,3 @@ section.resume-section {
     margin-top: 1cm;
   }
 }
-

@@ -3,22 +3,19 @@
     <h2 class="mb-5" id="skills-title" appScrollAnimation>Compétences</h2>
 
     @for (category of skills; track category.category; let i = $index) {
-      <div class="mb-3" appScrollAnimation [animationDelay]="i * 100">
-        <!-- Nom catégorie si présent -->
-        @if (category.category) {
-          <div class="subheading mb-3">{{ category.category }}</div>
-        }
+    <div class="mb-4" appScrollAnimation [animationDelay]="i * 100">
+      <!-- Nom catégorie si présent -->
+      @if (category.category) {
+      <div class="subheading mb-3">{{ category.category }}</div>
+      }
 
-        <!-- Liste compétences -->
-        <ul class="list-inline">
-          @for (skill of category.skills; track skill; let last = $last) {
-            <li class="list-inline-item">
-              {{ skill }}@if (!last) { · }
-            </li>
-          }
-        </ul>
+      <!-- Liste compétences en badges -->
+      <div class="skill-badges-container">
+        @for (skill of category.skills; track skill) {
+        <span class="skill-badge">{{ skill }}</span>
+        }
       </div>
+    </div>
     }
   </div>
 </section>
-

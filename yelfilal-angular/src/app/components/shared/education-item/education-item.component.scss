@@ -2,5 +2,26 @@
  * Styles spécifiques au EducationItemComponent
  */
 
-// Pas de styles additionnels nécessaires
+.distinction-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+    color: #d97706;
+    border: 1px solid rgba(245, 158, 11, 0.2);
 
+    i {
+        font-size: 0.7rem;
+    }
+}
+
+[data-theme="dark"] .distinction-badge {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.25);
+}

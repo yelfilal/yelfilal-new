@@ -2,5 +2,8 @@
  * Styles spécifiques au SkillsComponent
  */
 
-// Pas de styles additionnels nécessaires
-
+.skill-badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}

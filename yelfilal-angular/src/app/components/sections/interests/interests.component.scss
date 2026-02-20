@@ -2,5 +2,11 @@
  * Styles spécifiques au InterestsComponent
  */
 
-// Pas de styles spécifiques - géré par Bootstrap global
+.interests-card {
+    max-width: 42rem;
 
+    p {
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
+}

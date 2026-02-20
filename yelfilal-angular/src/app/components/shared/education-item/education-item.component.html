@@ -1,9 +1,11 @@
-<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+<div class="resume-card d-flex flex-column flex-md-row justify-content-between">
   <div class="flex-grow-1">
     <h3 class="mb-0">{{ education.degree }}</h3>
     <div class="subheading mb-3">{{ education.institution }}</div>
     @if (education.distinction) {
-      <div>{{ education.distinction }}</div>
+    <div class="distinction-badge">
+      <i class="fas fa-star"></i> {{ education.distinction }}
+    </div>
     }
   </div>
   <div class="flex-shrink-0 text-md-end date-column">
@@ -11,4 +13,3 @@
     <div class="text-muted">{{ education.location }}</div>
   </div>
 </div>
-

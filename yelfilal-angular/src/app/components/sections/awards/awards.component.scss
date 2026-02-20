@@ -2,5 +2,13 @@
  * Styles spécifiques au AwardsComponent
  */
 
-// Pas de styles additionnels nécessaires
+.awards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
 
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+        gap: 0 1rem;
+    }
+}

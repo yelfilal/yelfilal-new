@@ -2,13 +2,12 @@
   <div class="resume-section-content">
     <h2 class="mb-5" id="awards-title" appScrollAnimation>Prix &amp; Certifications</h2>
 
-    <ul class="fa-ul mb-0">
+    <div class="awards-grid">
       @for (award of awards; track award.name; let i = $index) {
-        <li appScrollAnimation [animationDelay]="i * 100">
-          <app-award-item [award]="award"></app-award-item>
-        </li>
+      <div appScrollAnimation [animationDelay]="i * 80">
+        <app-award-item [award]="award"></app-award-item>
+      </div>
       }
-    </ul>
+    </div>
   </div>
 </section>
-
