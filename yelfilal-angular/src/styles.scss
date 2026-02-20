@@ -88,6 +88,7 @@ section.resume-section {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -99,6 +100,7 @@ section.resume-section {
     opacity: 0;
     transform: scale(0.85);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -106,18 +108,37 @@ section.resume-section {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 5px rgba(var(--color-accent-rgb), 0.3); }
-  50% { box-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.5); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(var(--color-accent-rgb), 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.5);
+  }
 }
 
 .animate-on-scroll {
@@ -190,12 +211,18 @@ body {
   }
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 800;
   text-transform: none; // no more harsh uppercase
@@ -203,12 +230,14 @@ h6, .h6 {
   letter-spacing: -0.02em;
 }
 
-h1, .h1 {
+h1,
+.h1 {
   font-size: clamp(2.8rem, 6vw, 5rem);
   line-height: 1.05;
 }
 
-h2, .h2 {
+h2,
+.h2 {
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   position: relative;
   display: inline-block;
@@ -231,7 +260,8 @@ h2, .h2 {
   }
 }
 
-h3, .h3 {
+h3,
+.h3 {
   font-size: 1.35rem;
   font-weight: 700;
 }
@@ -634,7 +664,7 @@ hr.m-0 {
   padding-left: 0;
   list-style-type: none;
 
-  > li {
+  >li {
     position: relative;
   }
 
@@ -684,6 +714,7 @@ hr.m-0 {
 // =============================================================================
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -715,103 +746,96 @@ hr.m-0 {
 
 @media print {
 
+  /* CRITICAL: Force exact background colors and gradients for a beautiful "Blue Peps" PDF */
   * {
-    color: #000 !important;
-    background: transparent !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
     box-shadow: none !important;
-    text-shadow: none !important;
+    /* Clean up hover shadows */
   }
 
+  html,
   body {
     padding: 0 !important;
     margin: 0 !important;
+    background: var(--color-bg-primary) !important;
+    color: var(--color-text-primary) !important;
     font-size: 10pt !important;
-    line-height: 1.4 !important;
-    background: #fff !important;
-    color: #000 !important;
   }
 
+  /* Reset padding normally used by the sidebar */
+  body {
+    padding-left: 0 !important;
+  }
+
+  /* Hide UI elements not needed in PDF */
   #sideNav,
   .navbar,
   .social-icons,
   .theme-toggle,
   .theme-toggle-container,
+  .fab-export-pdf,
   .img-profile,
   .skip-link,
   hr {
     display: none !important;
   }
 
-  body {
-    padding-left: 0 !important;
-  }
-
   main.container-fluid {
-    padding: 0 !important;
-  }
-
-  section.resume-section {
-    padding: 0.5rem 0 !important;
-    min-height: auto !important;
+    padding: 0 1cm !important;
     max-width: 100% !important;
+  }
+
+  /* Optimize sections spacing */
+  section.resume-section {
+    padding: 1.5rem 0 !important;
+    min-height: auto !important;
+    margin-bottom: 0 !important;
     page-break-inside: avoid;
     break-inside: avoid;
   }
 
-  .resume-item,
-  .resume-card {
+  /* Force desktop layout (row) for experience/education rows instead of mobile stacking */
+  .resume-card.flex-column {
+    flex-direction: row !important;
+    gap: 1.5rem;
+  }
+
+  .text-md-end {
+    text-align: right !important;
+  }
+
+  /* Preserve card design but avoid splitting across pages */
+  .resume-card,
+  .award-card,
+  .skill-badge {
     page-break-inside: avoid;
     break-inside: avoid;
-    border: none !important;
     backdrop-filter: none !important;
+    /* Blur can cause rendering bugs in print */
+    background: var(--color-card-bg) !important;
+    border: 1px solid var(--color-card-border) !important;
   }
 
-  h1, .h1 {
-    font-size: 22pt !important;
-    color: #000 !important;
-    margin-bottom: 0.25rem !important;
+  .resume-card {
+    margin-bottom: 1.25rem !important;
+    padding: 1.25rem !important;
   }
 
-  h2, .h2 {
-    font-size: 16pt !important;
-    color: #000 !important;
-    page-break-after: avoid;
-    margin-bottom: 0.5rem !important;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 0.25rem;
-
-    &::after {
-      display: none;
-    }
+  /* Force Awards Grid to stay in 2 columns */
+  .awards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
   }
 
-  h3, .h3 {
-    font-size: 12pt !important;
-    color: #000 !important;
-  }
-
-  .subheading {
-    font-size: 11pt !important;
-    color: #333 !important;
-  }
-
-  p, li {
-    orphans: 3;
-    widows: 3;
-    font-size: 10pt !important;
-  }
-
-  a {
-    color: #000 !important;
-    text-decoration: underline !important;
-  }
-
-  .text-primary {
-    color: #333 !important;
-  }
-
-  .bg-primary {
-    background: transparent !important;
+  /* Disable animations and transitions for print */
+  *,
+  .resume-card::before,
+  .award-card::before {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
   }
 
   .animate-on-scroll {
@@ -820,12 +844,43 @@ hr.m-0 {
     animation: none !important;
   }
 
-  @page {
-    size: A4;
-    margin: 1.5cm;
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
   }
 
-  @page :first {
-    margin-top: 1cm;
+  /* Typographic adjustments for print */
+  h1,
+  .h1 {
+    font-size: 24pt !important;
+    margin-bottom: 0.5rem !important;
+    margin-top: 1rem !important;
+  }
+
+  h2,
+  .h2 {
+    font-size: 16pt !important;
+    margin-bottom: 1rem !important;
+  }
+
+  h3,
+  .h3 {
+    font-size: 13pt !important;
+  }
+
+  .subheading {
+    font-size: 11pt !important;
+  }
+
+  p,
+  li {
+    font-size: 10pt !important;
+    orphans: 3;
+    widows: 3;
+  }
+
+  @page {
+    size: A4;
+    margin: 1cm;
   }
 }

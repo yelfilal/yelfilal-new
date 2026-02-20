@@ -20,3 +20,15 @@
 
   <app-awards></app-awards>
 </main>
+
+<!-- Floating Action Button - Export PDF -->
+<button
+  class="fab-export-pdf"
+  (click)="exportPdf()"
+  aria-label="Exporter en PDF"
+  title="Exporter en PDF"
+  id="export-pdf-btn"
+>
+  <i class="fas fa-file-pdf fab-export-pdf__icon"></i>
+  <span class="fab-export-pdf__label">PDF</span>
+</button>

@@ -29,4 +29,9 @@ export class AppComponent {
 
   // Injection du ThemeService pour initialiser le thème au démarrage
   private readonly themeService = inject(ThemeService);
+
+  /** Exporte le CV en PDF via la boîte de dialogue d'impression du navigateur */
+  exportPdf(): void {
+    window.print();
+  }
 }
