@@ -80,14 +80,15 @@ Je suis toujours à la recherche de défis qui me permettent de développer mes 
 
   skills: [
     { category: 'Frontend', skills: ['HTML', 'CSS', 'Bootstrap', 'JS', 'Angular 2+', 'Angular Material'] },
-    { category: 'Backend', skills: ['PHP', 'Java', 'Spring', 'Springboot', 'Hibernate', 'JPA', 'REST', 'SOLID'] },
-    { category: 'Databases', skills: ['MSSQL', 'MySQL', 'PostgreSQL'] },
-    { category: 'Build Tools', skills: ['Maven', 'Gradle', 'Flyway'] },
+    { category: 'Backend', skills: ['PHP', 'Java', 'Spring', 'Springboot', 'Hibernate', 'JPA', 'REST', 'RabbitMQ'] },
+    { category: 'Databases', skills: ['MSSQL', 'MySQL', 'PostgreSQL', 'Flyway'] },
+    { category: 'Build Tools', skills: ['Maven', 'Gradle'] },
     { category: 'Testing', skills: ['JUnit', 'Cypress', 'Karate'] },
-    { category: 'DevOps', skills: ['Openshift', 'Kubernetes', 'Skaffold', 'Helm', 'RabbitMQ'] },
-    { category: 'Version Control & Tools', skills: ['GIT', 'Bitbucket', 'YouTrack', 'Jira', 'Trello'] },
+    { category: 'DevOps', skills: ['Openshift', 'Kubernetes', 'Skaffold', 'Helm'] },
+    { category: 'Version Control', skills: ['GIT', 'Bitbucket'] },
+    { category: 'Project Management', skills: ['YouTrack', 'Jira', 'Trello'] },
     { category: 'Modeling', skills: ['UML'] },
-    { category: 'Methodologies', skills: ['Méthodes agiles & Scrum'] }
+    { category: 'Methodologies', skills: ['Méthodes agiles & Scrum', 'SOLID'] }
   ],
 
   interests: `Durant mon temps libre, je plonge volontiers dans différents genres de lecture pour élargir mes horizons. Le football est mon sport préféré, j'adore suivre les matchs et discuter des stratégies avec des amis. La technologie me fascine aussi ; j'aime découvrir les dernières innovations et voir comment elles façonnent notre quotidien.`,
