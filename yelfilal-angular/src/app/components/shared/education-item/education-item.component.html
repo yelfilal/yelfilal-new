@@ -1,15 +1,16 @@
-<div class="resume-card d-flex flex-column flex-md-row justify-content-between">
-  <div class="flex-grow-1">
-    <h3 class="mb-0">{{ education.degree }}</h3>
-    <div class="subheading mb-3">{{ education.institution }}</div>
+<article class="card edu-card">
+  <span class="edu-card__tile" aria-hidden="true">
+    <app-icon name="graduation-cap" [size]="26" />
+  </span>
+
+  <div class="edu-card__body">
+    <p class="label edu-card__dates">{{ education.startDate }} — {{ education.endDate }}</p>
+    <h3 class="edu-card__degree">{{ education.degree }}</h3>
+    <p class="edu-card__institution">{{ education.institution }}</p>
+    <p class="edu-card__location">{{ education.location }}</p>
+
     @if (education.distinction) {
-    <div class="distinction-badge">
-      <i class="fas fa-star"></i> {{ education.distinction }}
-    </div>
+      <span class="badge"><app-icon name="star" [size]="12" />{{ education.distinction }}</span>
     }
   </div>
-  <div class="flex-shrink-0 text-md-end date-column">
-    <span class="text-primary">{{ education.startDate }} - {{ education.endDate }}</span>
-    <div class="text-muted">{{ education.location }}</div>
-  </div>
-</div>
+</article>

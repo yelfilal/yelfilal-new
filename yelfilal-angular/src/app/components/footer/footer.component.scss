@@ -1,0 +1,18 @@
+// Même conteneur que les sections ; prolonge la section contact (40px en bas)
+:host {
+  display: block;
+  box-sizing: content-box;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0 clamp(20px, 4vw, 48px) 40px;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 32px 4px 0;
+  font-size: 14px;
+  color: var(--color-text-3);
+}

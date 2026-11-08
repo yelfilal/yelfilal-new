@@ -1,8 +1,15 @@
-<section class="resume-section" id="interests" aria-labelledby="interests-title">
-  <div class="resume-section-content" appScrollAnimation>
-    <h2 class="mb-5" id="interests-title">Centres d'intérêt</h2>
-    <div class="resume-card interests-card">
-      <p class="mb-0">{{ interests }}</p>
-    </div>
+<section class="section interests-section" id="interests" aria-labelledby="interests-title">
+  <h2 class="section__title" id="interests-title" appScrollAnimation>Centres d'intérêt</h2>
+
+  <div class="interests">
+    @for (interest of interests; track interest.title; let i = $index) {
+      <article class="card interest-card" appScrollAnimation [animationDelay]="i * 80">
+        <span class="interest-card__tile" aria-hidden="true">
+          <app-icon [name]="interest.icon" [size]="24" />
+        </span>
+        <h3 class="interest-card__title">{{ interest.title }}</h3>
+        <p class="interest-card__text">{{ interest.text }}</p>
+      </article>
+    }
   </div>
 </section>

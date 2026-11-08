@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AboutComponent } from './about.component';
-import { CvDataService } from '../../../services/cv-data.service';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
   let fixture: ComponentFixture<AboutComponent>;
+  let compiled: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AboutComponent],
-      providers: [CvDataService]
+      imports: [AboutComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;
+    compiled = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
   });
 
@@ -21,71 +21,65 @@ describe('AboutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Personal Info', () => {
-    it('should retrieve personal info from service', () => {
-      expect(component.personalInfo).toBeTruthy();
+  it('should be the #about section labelled by the h1', () => {
+    const section = compiled.querySelector('section');
+    expect(section?.id).toBe('about');
+    expect(section?.getAttribute('aria-labelledby')).toBe('about-title');
+    expect(compiled.querySelector('h1')?.id).toBe('about-title');
+  });
+
+  it('should display the job title in the eyebrow', () => {
+    expect(compiled.querySelector('.hero__eyebrow')?.textContent?.trim()).toBe('Java Fullstack Engineer');
+  });
+
+  it('should display the headline with the highlighted words', () => {
+    const h1 = compiled.querySelector('h1');
+    expect(h1?.textContent).toBe('Des applications qui répondent efficacement aux besoins des utilisateurs.');
+    expect(h1?.querySelector('.hero__highlight')?.textContent).toBe('répondent efficacement');
+  });
+
+  it('should not display the name in the visible text', () => {
+    expect(compiled.textContent).not.toContain('El FILALI');
+  });
+
+  it('should display the two intro paragraphs', () => {
+    const paragraphs = compiled.querySelectorAll('.hero__intro');
+    expect(paragraphs.length).toBe(2);
+    expect(paragraphs[0].textContent).toContain('Passionné');
+  });
+
+  it('should link "Voir mon parcours" to the experience section', () => {
+    const cta = compiled.querySelector('.hero__cta');
+    expect(cta?.textContent).toContain('Voir mon parcours');
+    expect(cta?.getAttribute('href')).toBe('#experience');
+  });
+
+  describe('Contact icons', () => {
+    it('should have a mailto link with an accessible label', () => {
+      const mail = compiled.querySelector('a[href^="mailto:"]');
+      expect(mail?.getAttribute('href')).toBe('mailto:yelfilal.ict@ik.me');
+      expect(mail?.getAttribute('aria-label')).toContain('E-mail');
     });
 
-    it('should display first name', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      expect(compiled.textContent).toContain('Yassine');
-    });
+    it('should have LinkedIn and GitHub links opened safely in a new tab', () => {
+      const links = Array.from(compiled.querySelectorAll<HTMLAnchorElement>('.hero__social[target="_blank"]'));
 
-    it('should display last name with text-primary class', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const lastName = compiled.querySelector('.text-primary');
-      expect(lastName?.textContent).toContain('El FILALI');
-    });
-
-    it('should display professional title', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const title = compiled.querySelector('.subheading');
-      expect(title?.textContent).toContain('FULLSTACK DEVELOPER');
-    });
-
-    it('should display description', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const description = compiled.querySelector('.lead');
-      expect(description?.textContent).toContain('Passionné');
+      expect(links.map(l => l.getAttribute('aria-label'))).toEqual(['LinkedIn', 'GitHub']);
+      links.forEach(link => expect(link.getAttribute('rel')).toBe('noopener noreferrer'));
     });
   });
 
-  describe('Social Links', () => {
-    it('should display 2 social links', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const links = compiled.querySelectorAll('.social-icon');
-      expect(links.length).toBe(2);
+  describe('Photo', () => {
+    it('should display the profile picture with a descriptive alt', () => {
+      const img = compiled.querySelector('figure img');
+      expect(img?.getAttribute('src')).toBe('./img/profile.jpg');
+      expect(img?.getAttribute('alt')).toBe('Portrait de Yassine El FILALI');
     });
 
-    it('should have LinkedIn link', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const links = compiled.querySelectorAll('.social-icon');
-      const hrefs = Array.from(links).map(l => l.getAttribute('href'));
-      expect(hrefs.some(h => h?.includes('linkedin'))).toBeTrue();
-    });
-
-    it('should have GitHub link', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const links = compiled.querySelectorAll('.social-icon');
-      const hrefs = Array.from(links).map(l => l.getAttribute('href'));
-      expect(hrefs.some(h => h?.includes('github'))).toBeTrue();
-    });
-
-    it('should open links in new tab', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const links = compiled.querySelectorAll('.social-icon');
-      links.forEach(link => {
-        expect(link.getAttribute('target')).toBe('_blank');
-      });
-    });
-
-    it('should have security attributes', () => {
-      const compiled = fixture.nativeElement as HTMLElement;
-      const links = compiled.querySelectorAll('.social-icon');
-      links.forEach(link => {
-        expect(link.getAttribute('rel')).toBe('noopener noreferrer');
-      });
+    it('should display the caption', () => {
+      const caption = compiled.querySelector('figcaption')?.textContent;
+      expect(caption).toContain('ONEM · détaché par SMALS');
+      expect(caption).toContain('Depuis juillet 2022');
     });
   });
 });
-

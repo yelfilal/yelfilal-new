@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AwardsComponent } from './awards.component';
-import { CvDataService } from '../../../services/cv-data.service';
 
 describe('AwardsComponent', () => {
   let component: AwardsComponent;
   let fixture: ComponentFixture<AwardsComponent>;
+  let compiled: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AwardsComponent],
-      providers: [CvDataService]
+      imports: [AwardsComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AwardsComponent);
     component = fixture.componentInstance;
+    compiled = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
   });
 
@@ -22,39 +22,22 @@ describe('AwardsComponent', () => {
   });
 
   it('should retrieve 9 awards', () => {
-    expect(component.awards).toBeTruthy();
     expect(component.awards.length).toBe(9);
   });
 
-  it('should render 9 award items', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const items = compiled.querySelectorAll('app-award-item');
-    expect(items.length).toBe(9);
+  it('should render 9 award items in a grid', () => {
+    expect(compiled.querySelectorAll('.awards-grid > app-award-item').length).toBe(9);
   });
 
-  it('should include Angular certification', () => {
-    const angular = component.awards.find(a => a.name === 'Angular');
-    expect(angular).toBeTruthy();
-    expect(angular?.url).toContain('sololearn.com');
+  it('should not number the certifications', () => {
+    compiled.querySelectorAll('.award-card__name').forEach(name => expect(name.textContent).not.toMatch(/^\s*\d/));
   });
 
   it('should have section title', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const title = compiled.querySelector('h2');
-    expect(title?.textContent).toContain('Prix');
-    expect(title?.textContent).toContain('Certifications');
+    expect(compiled.querySelector('h2')?.textContent).toBe('Prix & Certifications');
   });
 
   it('should have correct section id', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const section = compiled.querySelector('section');
-    expect(section?.getAttribute('id')).toBe('awards');
-  });
-
-  it('should have fa-ul list', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const list = compiled.querySelector('ul');
-    expect(list?.classList.contains('fa-ul')).toBeTrue();
+    expect(compiled.querySelector('section')?.getAttribute('id')).toBe('awards');
   });
 });
-

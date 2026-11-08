@@ -1,6 +1,15 @@
-/**
- * Styles spécifiques au EducationComponent
- */
+:host {
+  display: block;
+}
 
-// Pas de styles additionnels nécessaires
+// Deux cartes côte à côte en desktop, puis une par ligne
+.edu-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
 
+app-education-item {
+  flex: 1 1 420px;
+  min-width: 0;
+}

@@ -1,4 +1,4 @@
-﻿import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+﻿import { TestBed } from '@angular/core/testing';
 import { ThemeService } from './theme.service';
 
 describe('ThemeService', () => {
@@ -16,6 +16,16 @@ describe('ThemeService', () => {
     document.documentElement.removeAttribute('data-theme');
   });
 
+  /** Recrée le service après avoir simulé la préférence système. */
+  function createWithSystemPreference(prefersLight: boolean): ThemeService {
+    TestBed.resetTestingModule();
+    spyOn(window, 'matchMedia').and.callFake(
+      (query: string) => ({ matches: query.includes('light') && prefersLight }) as MediaQueryList
+    );
+    TestBed.configureTestingModule({});
+    return TestBed.inject(ThemeService);
+  }
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -23,6 +33,21 @@ describe('ThemeService', () => {
   it('should have a theme signal', () => {
     expect(service.theme).toBeDefined();
     expect(['light', 'dark']).toContain(service.theme());
+  });
+
+  describe('initial theme', () => {
+    it('should fall back to dark when nothing is stored and the system is not light', () => {
+      expect(createWithSystemPreference(false).theme()).toBe('dark');
+    });
+
+    it('should follow prefers-color-scheme: light', () => {
+      expect(createWithSystemPreference(true).theme()).toBe('light');
+    });
+
+    it('should prefer the stored choice over the system preference', () => {
+      localStorage.setItem('yelfilal-cv-theme', 'dark');
+      expect(createWithSystemPreference(true).theme()).toBe('dark');
+    });
   });
 
   it('should toggle theme from light to dark', () => {
@@ -44,6 +69,12 @@ describe('ThemeService', () => {
     expect(localStorage.getItem('yelfilal-cv-theme')).toBe('light');
   });
 
+  it('should apply the theme to <html>', () => {
+    service.setTheme('dark');
+    TestBed.flushEffects();
+    expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+  });
+
   it('should compute isDark correctly for light theme', () => {
     service.setTheme('light');
     expect(service.isDark()).toBe(false);
@@ -52,10 +83,5 @@ describe('ThemeService', () => {
   it('should compute isDark correctly for dark theme', () => {
     service.setTheme('dark');
     expect(service.isDark()).toBe(true);
-  });
-
-  it('should have isDark as computed signal', () => {
-    expect(service.isDark).toBeDefined();
-    expect(typeof service.isDark()).toBe('boolean');
   });
 });

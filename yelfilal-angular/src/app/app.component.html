@@ -1,34 +1,15 @@
-<a href="#about" class="skip-link">Aller au contenu principal</a>
+<a href="#main" class="skip-link">Aller au contenu principal</a>
 
-<app-header></app-header>
+<app-header />
 
-<main class="container-fluid p-0" role="main">
-  <app-about></app-about>
-  <hr class="m-0"/>
-
-  <app-experience></app-experience>
-  <hr class="m-0"/>
-
-  <app-education></app-education>
-  <hr class="m-0"/>
-
-  <app-skills></app-skills>
-  <hr class="m-0"/>
-
-  <app-interests></app-interests>
-  <hr class="m-0"/>
-
-  <app-awards></app-awards>
+<main id="main" tabindex="-1">
+  <app-about />
+  <app-experience />
+  <app-skills />
+  <app-education />
+  <app-awards />
+  <app-interests />
+  <app-contact />
 </main>
 
-<!-- Floating Action Button - Export PDF -->
-<button
-  class="fab-export-pdf"
-  (click)="exportPdf()"
-  aria-label="Exporter en PDF"
-  title="Exporter en PDF"
-  id="export-pdf-btn"
->
-  <i class="fas fa-file-pdf fab-export-pdf__icon"></i>
-  <span class="fab-export-pdf__label">PDF</span>
-</button>
+<app-footer />

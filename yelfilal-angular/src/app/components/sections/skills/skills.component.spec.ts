@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SkillsComponent } from './skills.component';
-import { CvDataService } from '../../../services/cv-data.service';
 
 describe('SkillsComponent', () => {
   let component: SkillsComponent;
   let fixture: ComponentFixture<SkillsComponent>;
+  let compiled: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SkillsComponent],
-      providers: [CvDataService]
+      imports: [SkillsComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SkillsComponent);
     component = fixture.componentInstance;
+    compiled = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
   });
 
@@ -21,38 +21,32 @@ describe('SkillsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve 9 skill categories', () => {
-    expect(component.skills.length).toBe(9);
+  it('should retrieve 6 skill categories', () => {
+    expect(component.skills.length).toBe(6);
   });
 
-  it('should display category names', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const categories = compiled.querySelectorAll('.subheading');
-    expect(categories.length).toBeGreaterThan(0);
+  it('should render one card per category with an h3 title', () => {
+    const titles = Array.from(compiled.querySelectorAll('.skill-card h3')).map(h => h.textContent?.trim());
+    expect(titles.length).toBe(6);
+    expect(titles[0]).toBe('Frontend');
+    expect(titles[2]).toBe('Bases de données');
   });
 
-  it('should display skills in categories', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const skillItems = compiled.querySelectorAll('.list-inline-item');
-    expect(skillItems.length).toBeGreaterThan(0);
+  it('should render each skill as a chip', () => {
+    const total = component.skills.reduce((sum, c) => sum + c.skills.length, 0);
+    expect(compiled.querySelectorAll('.chip').length).toBe(total);
+    expect(compiled.querySelector('.chip')?.textContent?.trim()).toBe('HTML');
   });
 
-  it('should include Frontend category', () => {
-    const frontend = component.skills.find(s => s.category === 'Frontend');
-    expect(frontend).toBeTruthy();
-    expect(frontend?.skills).toContain('Angular 2+');
+  it('should not display counters next to the category titles', () => {
+    compiled.querySelectorAll('.skill-card h3').forEach(h3 => expect(h3.textContent).not.toMatch(/\d/));
   });
 
   it('should have section title', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const title = compiled.querySelector('h2');
-    expect(title?.textContent).toContain('Compétences');
+    expect(compiled.querySelector('h2')?.textContent).toBe('Compétences');
   });
 
   it('should have correct section id', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const section = compiled.querySelector('section');
-    expect(section?.getAttribute('id')).toBe('skills');
+    expect(compiled.querySelector('section')?.getAttribute('id')).toBe('skills');
   });
 });
-

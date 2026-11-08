@@ -1,8 +1,30 @@
+/** Icônes des réseaux sociaux (rendues par `app-icon`). */
+export type SocialIcon = 'linkedin' | 'github';
+
+/** Icônes des centres d'intérêt (rendues par `app-icon`). */
+export type InterestIcon = 'book' | 'ball' | 'chip';
+
+/** Titre d'accueil : `highlight` est mis en avant (italique, couleur d'accent). */
+export interface Headline {
+  lead: string;
+  highlight: string;
+  trail: string;
+}
+
+/** Légende sous la photo de profil. */
+export interface PhotoCaption {
+  label: string;
+  since: string;
+}
+
 export interface PersonalInfo {
   firstName: string;
   lastName: string;
   title: string;
-  description: string;
+  headline: Headline;
+  intro: string[];
+  email: string;
+  photoCaption: PhotoCaption;
   profileImage: string;
   socialLinks: SocialLink[];
 }
@@ -10,7 +32,7 @@ export interface PersonalInfo {
 export interface SocialLink {
   platform: string;
   url: string;
-  icon: string;
+  icon: SocialIcon;
 }
 
 export interface Experience {
@@ -34,12 +56,19 @@ export interface Education {
 
 export interface Award {
   name: string;
+  issuer: string;
   url: string;
 }
 
 export interface SkillCategory {
-  category?: string;
+  category: string;
   skills: string[];
+}
+
+export interface Interest {
+  title: string;
+  text: string;
+  icon: InterestIcon;
 }
 
 export interface CVData {
@@ -47,7 +76,6 @@ export interface CVData {
   experiences: Experience[];
   education: Education[];
   skills: SkillCategory[];
-  interests: string;
+  interests: Interest[];
   awards: Award[];
 }
-

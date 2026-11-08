@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EducationComponent } from './education.component';
-import { CvDataService } from '../../../services/cv-data.service';
 
 describe('EducationComponent', () => {
   let component: EducationComponent;
   let fixture: ComponentFixture<EducationComponent>;
+  let compiled: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EducationComponent],
-      providers: [CvDataService]
+      imports: [EducationComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EducationComponent);
     component = fixture.componentInstance;
+    compiled = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
   });
 
@@ -21,32 +21,25 @@ describe('EducationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve 2 education entries', () => {
-    expect(component.education).toBeTruthy();
-    expect(component.education.length).toBe(2);
+  it('should retrieve 3 education entries', () => {
+    expect(component.education.length).toBe(3);
   });
 
   it('should display in antichronological order', () => {
-    expect(component.education[0].institution).toContain('HELHa');
-    expect(component.education[0].distinction).toBe('Distinction');
+    expect(component.education[0].institution).toContain('Condorcet');
+    expect(component.education[1].institution).toContain('HELHa');
+    expect(component.education[2].institution).toContain('IJJ');
   });
 
-  it('should render 2 education items', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const items = compiled.querySelectorAll('app-education-item');
-    expect(items.length).toBe(2);
+  it('should render 3 education items', () => {
+    expect(compiled.querySelectorAll('app-education-item').length).toBe(3);
   });
 
-  it('should have section title', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const title = compiled.querySelector('h2');
-    expect(title?.textContent).toContain('Formation');
+  it('should have section title "Études"', () => {
+    expect(compiled.querySelector('h2')?.textContent).toBe('Études');
   });
 
   it('should have correct section id', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const section = compiled.querySelector('section');
-    expect(section?.getAttribute('id')).toBe('education');
+    expect(compiled.querySelector('section')?.getAttribute('id')).toBe('education');
   });
 });
-

@@ -1,13 +1,9 @@
-<section class="resume-section" id="awards" aria-labelledby="awards-title">
-  <div class="resume-section-content">
-    <h2 class="mb-5" id="awards-title" appScrollAnimation>Prix &amp; Certifications</h2>
+<section class="section" id="awards" aria-labelledby="awards-title">
+  <h2 class="section__title" id="awards-title" appScrollAnimation>Prix &amp; Certifications</h2>
 
-    <div class="awards-grid">
-      @for (award of awards; track award.name; let i = $index) {
-      <div appScrollAnimation [animationDelay]="i * 80">
-        <app-award-item [award]="award"></app-award-item>
-      </div>
-      }
-    </div>
+  <div class="awards-grid">
+    @for (award of awards; track award.name; let i = $index) {
+      <app-award-item [award]="award" appScrollAnimation [animationDelay]="(i % 3) * 80" />
+    }
   </div>
 </section>

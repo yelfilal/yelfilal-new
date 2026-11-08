@@ -3,8 +3,8 @@ import { EducationItemComponent } from './education-item.component';
 import { Education } from '../../../models/cv-data.model';
 
 describe('EducationItemComponent', () => {
-  let component: EducationItemComponent;
   let fixture: ComponentFixture<EducationItemComponent>;
+  let compiled: HTMLElement;
 
   const mockEducation: Education = {
     institution: 'HELHa',
@@ -15,48 +15,44 @@ describe('EducationItemComponent', () => {
     distinction: 'Distinction'
   };
 
+  function render(education: Education): void {
+    fixture = TestBed.createComponent(EducationItemComponent);
+    fixture.componentRef.setInput('education', education);
+    compiled = fixture.nativeElement as HTMLElement;
+    fixture.detectChanges();
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [EducationItemComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EducationItemComponent);
-    component = fixture.componentInstance;
-    component.education = mockEducation;
-    fixture.detectChanges();
+    render(mockEducation);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should display degree', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const heading = compiled.querySelector('h3');
-    expect(heading?.textContent?.trim()).toBe(mockEducation.degree);
+  it('should display the dates separated by an em dash', () => {
+    expect(compiled.querySelector('.edu-card__dates')?.textContent?.trim()).toBe('Septembre 2019 — Juin 2022');
   });
 
-  it('should display institution', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const subheading = compiled.querySelector('.subheading');
-    expect(subheading?.textContent?.trim()).toBe(mockEducation.institution);
+  it('should display degree as h3', () => {
+    expect(compiled.querySelector('h3')?.textContent?.trim()).toBe(mockEducation.degree);
   });
 
-  it('should display dates', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const dates = compiled.querySelector('.text-primary');
-    expect(dates?.textContent).toContain(mockEducation.startDate);
-    expect(dates?.textContent).toContain(mockEducation.endDate);
+  it('should display institution and location', () => {
+    expect(compiled.querySelector('.edu-card__institution')?.textContent?.trim()).toBe('HELHa');
+    expect(compiled.querySelector('.edu-card__location')?.textContent?.trim()).toBe('Montignies-sur-Sambre');
   });
 
-  it('should display distinction if present', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Distinction');
+  it('should display the distinction badge if present', () => {
+    expect(compiled.querySelector('.badge')?.textContent?.trim()).toBe('Distinction');
   });
 
-  it('should display location', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Montignies-sur-Sambre');
+  it('should not display a badge without distinction', () => {
+    render({ ...mockEducation, distinction: undefined });
+    expect(compiled.querySelector('.badge')).toBeNull();
   });
 });
-

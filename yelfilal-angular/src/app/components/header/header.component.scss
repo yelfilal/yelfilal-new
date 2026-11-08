@@ -1,29 +1,164 @@
-/**
- * Styles spécifiques au HeaderComponent
- */
-
-// Container pour le toggle de thème (en bas de la sidebar sur desktop)
-.theme-toggle-container {
-  display: none; // Caché par défaut (mobile)
+// L'hôte est collant : posé 8px au-dessus du haut de l'écran, il cale la pilule
+// (24px sous son bord) à 16px du haut. Son pourtour transparent laisse passer
+// les clics vers le contenu.
+:host {
+  display: block;
+  position: sticky;
+  top: -8px;
+  z-index: 100;
+  pointer-events: none;
 }
 
-// Sur desktop (lg+), afficher en bas de la sidebar
-@media (min-width: 992px) {
-  .theme-toggle-container {
-    display: flex !important;
-    justify-content: center;
-    position: absolute;
-    bottom: 2rem;
-    left: 0;
-    right: 0;
-    z-index: 10;
+.site-header {
+  padding: 24px clamp(16px, 3vw, 32px) 0;
+}
+
+.nav {
+  position: relative;
+  box-sizing: content-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  padding: 10px 10px 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-nav);
+  pointer-events: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  border-radius: 999px;
+  color: var(--color-heading);
+}
+
+.brand__mark {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 999px;
+  color: var(--color-text-2);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background: var(--color-hover);
+    color: var(--color-text);
   }
 }
 
-// Animation photo de profil - scaleIn élégant
-.img-profile {
-  animation: scaleIn 0.6s ease-out both;
-  animation-delay: 0.2s; // Petit délai pour effet séquentiel
-  transition: border-color 0.3s ease;
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+.nav-pdf {
+  gap: 8px;
+  padding: 12px 20px;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.menu-btn {
+  display: none;
+}
+
+// — Menu replié : les liens passent dans un panneau sous la pilule.
+// Seuil à 1200px et non 992px : la pilule complète mesure ~1055px et passerait
+// sur deux lignes entre 992 et ~1140px.
+@media (max-width: 1199.98px) {
+  .menu-btn {
+    display: inline-flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-nav);
+
+    &.is-open {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    padding: 14px 18px;
+    border-radius: 16px;
+  }
+}
+
+// — Petits écrans : nom sur deux lignes, « CV en PDF » réduit à son icône
+@media (max-width: 575.98px) {
+  .brand {
+    gap: 10px;
+  }
+
+  .brand__name {
+    font-size: 15px;
+    line-height: 1.15;
+  }
+
+  .brand__first {
+    display: block;
+  }
+
+  .nav-pdf {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+  }
+
+  .nav-pdf__label {
+    display: none;
+  }
+}

@@ -1,17 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Yassine El FILALI — Fullstack Developer</title>
+  <title>Yassine El FILALI — Java Fullstack Engineer</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="CV en ligne de Yassine El FILALI, développeur Fullstack passionné – Angular, Spring Boot, Java, PHP." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CV en ligne de Yassine El FILALI, Java Fullstack Engineer : Angular, Spring Boot, Java." />
+  <meta name="color-scheme" content="dark light" />
   <link rel="icon" type="image/x-icon" href="./img/profile.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+
   <script>
+    // Fallback SPA de GitHub Pages : restaure le chemin mémorisé par 404.html.
     (function() {
       var redirect = sessionStorage.redirect;
       delete sessionStorage.redirect;
@@ -19,10 +21,26 @@
         history.replaceState(null, null, redirect);
       }
     })();
+
+    // Pose le thème avant le démarrage d'Angular pour éviter un flash de la mauvaise
+    // palette. Même logique que ThemeService : choix mémorisé, puis prefers-color-scheme,
+    // repli sur le sombre.
+    (function() {
+      var theme = 'dark';
+      try {
+        var stored = localStorage.getItem('yelfilal-cv-theme');
+        if (stored === 'light' || stored === 'dark') {
+          theme = stored;
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          theme = 'light';
+        }
+      } catch (e) {}
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
   </script>
 </head>
 
-<body id="page-top">
+<body>
   <app-root></app-root>
 </body>
 </html>

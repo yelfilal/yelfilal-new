@@ -1,14 +1,10 @@
-/**
- * Styles spécifiques au AwardsComponent
- */
+:host {
+  display: block;
+}
 
+// 3 × 3 en desktop, puis 2, puis 1
 .awards-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-
-    @media (min-width: 768px) {
-        grid-template-columns: 1fr 1fr;
-        gap: 0 1rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 20px;
 }

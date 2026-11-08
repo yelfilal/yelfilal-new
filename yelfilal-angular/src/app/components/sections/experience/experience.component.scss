@@ -1,6 +1,11 @@
-/**
- * Styles spécifiques au ExperienceComponent
- */
+:host {
+  display: block;
+}
 
-// Pas de styles additionnels nécessaires
-
+// Frise centrée ; le rail et les points sont dans ExperienceItemComponent
+.timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}

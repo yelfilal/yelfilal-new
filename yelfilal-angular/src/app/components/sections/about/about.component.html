@@ -1,32 +1,37 @@
-<!-- Section À propos -->
-<section class="resume-section" id="about" aria-labelledby="about-title">
-  <div class="resume-section-content" appScrollAnimation>
-    <!-- Nom complet avec nom de famille en orange -->
-    <h1 class="mb-0" id="about-title">
-      {{ personalInfo.firstName }}
-      <span class="text-primary">{{ personalInfo.lastName }}</span>
-    </h1>
+<!-- Accueil : volontairement sans le nom (il est dans la navigation et le pied de page) -->
+<section class="section hero" id="about" aria-labelledby="about-title">
+  <div class="hero__text" appScrollAnimation>
+    <p class="hero__eyebrow"><span class="hero__dot" aria-hidden="true"></span>{{ personalInfo.title }}</p>
 
-    <!-- Titre professionnel -->
-    <div class="subheading mb-5">{{ personalInfo.title }}</div>
+    <h1 class="hero__title" id="about-title">{{ personalInfo.headline.lead }}<span class="hero__highlight">{{ personalInfo.headline.highlight }}</span>{{ personalInfo.headline.trail }}</h1>
 
-    <!-- Description personnelle -->
-    <p class="lead mb-5">{{ personalInfo.description }}</p>
+    @for (paragraph of personalInfo.intro; track $index) {
+      <p class="hero__intro">{{ paragraph }}</p>
+    }
 
-    <!-- Liens réseaux sociaux -->
-    <div class="social-icons">
+    <div class="hero__actions">
+      <a class="btn btn--accent hero__cta" href="#experience" (click)="goToExperience($event)">
+        Voir mon parcours
+        <app-icon name="arrow-right" [size]="18" />
+      </a>
+
+      <a class="btn-round hero__social" [href]="'mailto:' + personalInfo.email" [attr.aria-label]="'E-mail : ' + personalInfo.email">
+        <app-icon name="mail" [size]="20" />
+      </a>
+
       @for (link of personalInfo.socialLinks; track link.platform) {
-        <a
-          class="social-icon"
-          [href]="link.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          [attr.aria-label]="link.platform"
-        >
-          <i [class]="link.icon"></i>
+        <a class="btn-round hero__social" [href]="link.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="link.platform">
+          <app-icon [name]="link.icon" [size]="link.icon === 'github' ? 22 : 20" />
         </a>
       }
     </div>
   </div>
-</section>
 
+  <figure class="hero__photo" appScrollAnimation [animationDelay]="120">
+    <img [src]="personalInfo.profileImage" [alt]="'Portrait de ' + fullName" width="440" height="440" />
+    <figcaption>
+      <span>{{ personalInfo.photoCaption.label }}</span>
+      <span class="hero__since">{{ personalInfo.photoCaption.since }}</span>
+    </figcaption>
+  </figure>
+</section>

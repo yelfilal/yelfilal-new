@@ -1,8 +1,12 @@
-<div class="award-card">
-  <span class="award-icon">
-    <i class="fas fa-trophy"></i>
+<a class="card award-card" [href]="award.url" target="_blank" rel="noopener noreferrer">
+  <span class="award-card__top">
+    <span class="award-card__tile" aria-hidden="true">
+      <app-icon name="medal" [size]="22" />
+    </span>
+    <span class="label award-card__issuer">{{ award.issuer }}</span>
   </span>
-  <a [href]="award.url" target="_blank" rel="noopener noreferrer">
-    {{ award.name }}
-  </a>
-</div>
+
+  <span class="award-card__name">{{ award.name }}</span>
+
+  <span class="award-card__cta">Voir le certificat<app-icon name="arrow-up-right" [size]="14" /></span>
+</a>

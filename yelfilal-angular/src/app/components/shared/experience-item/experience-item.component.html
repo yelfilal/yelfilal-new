@@ -1,19 +1,22 @@
-<div class="resume-card d-flex flex-column flex-md-row justify-content-between">
-  <div class="flex-grow-1">
-    <h3 class="mb-0">{{ experience.position }}</h3>
-    <div class="subheading mb-3">{{ experience.company }}</div>
+<div class="rail" aria-hidden="true">
+  <span class="rail__dot"></span>
+</div>
 
-    <!-- Responsabilités -->
-    <ul>
+<div class="entry">
+  <article class="card exp-card">
+    <p class="label exp-card__dates">{{ experience.startDate }} — {{ experience.endDate }}</p>
+
+    <div class="exp-card__head">
+      <h3 class="exp-card__position">{{ experience.position }}</h3>
+      <span class="exp-card__type">{{ experience.type }}</span>
+    </div>
+
+    <p class="exp-card__company">{{ experience.company }} · {{ experience.location }}</p>
+
+    <ul class="exp-card__list">
       @for (responsibility of experience.responsibilities; track responsibility) {
-      <li>{{ responsibility }}</li>
+        <li><span class="diamond" aria-hidden="true"></span><span>{{ responsibility }}</span></li>
       }
     </ul>
-  </div>
-
-  <!-- Dates et localisation -->
-  <div class="flex-shrink-0 text-md-end date-column">
-    <span class="text-primary">{{ experience.startDate }} - {{ experience.endDate }}</span>
-    <div class="text-muted">{{ experience.location }} - {{ experience.type }}</div>
-  </div>
+  </article>
 </div>

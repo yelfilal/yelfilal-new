@@ -12,26 +12,44 @@ export class ThemeService {
   readonly isDark = computed(() => this._theme() === 'dark');
 
   constructor() {
-    // Effect pour appliquer le thème au DOM automatiquement
     effect(() => {
       this.applyTheme(this._theme());
     });
   }
 
   /**
-   * Détermine le thème initial: localStorage > prefers-color-scheme > light
+   * Détermine le thème initial : localStorage > prefers-color-scheme > sombre.
+   * Le design Espresso est pensé sombre d'abord. Le script inline de
+   * `index.html` applique la même logique avant le démarrage d'Angular.
    */
   private getInitialTheme(): Theme {
-    const stored = localStorage.getItem(this.STORAGE_KEY) as Theme | null;
-    if (stored === 'light' || stored === 'dark') {
+    const stored = this.readStoredTheme();
+    if (stored) {
       return stored;
     }
 
-    if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
+    if (window.matchMedia?.('(prefers-color-scheme: light)').matches) {
+      return 'light';
     }
 
-    return 'light';
+    return 'dark';
+  }
+
+  private readStoredTheme(): Theme | null {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      return stored === 'light' || stored === 'dark' ? stored : null;
+    } catch {
+      return null; // stockage indisponible (navigation privée, cookies bloqués…)
+    }
+  }
+
+  private storeTheme(theme: Theme): void {
+    try {
+      localStorage.setItem(this.STORAGE_KEY, theme);
+    } catch {
+      // le choix ne sera simplement pas mémorisé
+    }
   }
 
   private applyTheme(theme: Theme): void {
@@ -39,13 +57,11 @@ export class ThemeService {
   }
 
   toggleTheme(): void {
-    const newTheme = this._theme() === 'light' ? 'dark' : 'light';
-    this._theme.set(newTheme);
-    localStorage.setItem(this.STORAGE_KEY, newTheme);
+    this.setTheme(this._theme() === 'light' ? 'dark' : 'light');
   }
 
   setTheme(theme: Theme): void {
     this._theme.set(theme);
-    localStorage.setItem(this.STORAGE_KEY, theme);
+    this.storeTheme(theme);
   }
 }

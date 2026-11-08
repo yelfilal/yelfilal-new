@@ -1,59 +1,169 @@
-# YelfilalAngular
+# 🎯 Yelfilal Angular CV
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+Application CV/Resume moderne développée avec **Angular 19**.
 
-## Development server
+[![Angular](https://img.shields.io/badge/Angular-19.2-red?logo=angular)](https://angular.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)](https://www.typescriptlang.org)
+[![Tests](https://img.shields.io/badge/Tests-85%20passing-green)](./src/app)
+[![License](https://img.shields.io/badge/License-Private-gray)]()
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## ✨ Fonctionnalités
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- 📱 **Responsive Design** - Adapté mobile, tablette et desktop
+- ⚡ **Performance** - Bundle optimisé ~210 kB, OnPush Change Detection
+- 🏗️ **Architecture Moderne** - Standalone Components Angular 19
+- 🎨 **Design Professionnel** - Bootstrap 5 + Font Awesome
+- ✅ **Tests** - 85 tests unitaires (100% pass)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🚀 Démarrage Rapide
 
-```bash
-ng generate component component-name
-```
+### Prérequis
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Node.js 18+ 
+- npm 9+
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Installation
 
 ```bash
-ng build
+# Cloner le repository
+git clone <repository-url>
+cd yelfilal-angular
+
+# Installer les dépendances
+npm install
+
+# Lancer le serveur de développement
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Ouvrez **http://localhost:4200** dans votre navigateur.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 📦 Scripts Disponibles
+
+| Commande | Description |
+|----------|-------------|
+| `npm start` | Serveur de développement avec HMR |
+| `npm run build` | Build de production |
+| `npm test` | Lancer les tests unitaires |
+| `npm run watch` | Build en mode watch |
+
+---
+
+## 🏗️ Structure du Projet
+
+```
+src/app/
+├── models/              # Interfaces TypeScript (7 interfaces)
+├── data/                # Données du CV centralisées
+├── services/            # CvDataService injectable
+└── components/
+    ├── header/          # Navigation sticky + profil
+    ├── sections/        # 6 sections du CV
+    │   ├── about/
+    │   ├── experience/
+    │   ├── education/
+    │   ├── skills/
+    │   ├── interests/
+    │   └── awards/
+    └── shared/          # 3 composants réutilisables
+        ├── experience-item/
+        ├── education-item/
+        └── award-item/
+```
+
+---
+
+## 🎯 Sections du CV
+
+| Section | Description |
+|---------|-------------|
+| **À propos** | Présentation personnelle + liens sociaux |
+| **Expérience** | Parcours professionnel |
+| **Formation** | Diplômes et certifications |
+| **Compétences** | Technologies et outils maîtrisés |
+| **Centres d'intérêt** | Hobbies et passions |
+| **Prix & Certifications** | Récompenses et certifications obtenues |
+
+---
+
+## 🔧 Technologies
+
+| Technologie | Version |
+|-------------|---------|
+| Angular | 19.2.0 |
+| TypeScript | 5.7.2 |
+| RxJS | 7.8.0 |
+| Bootstrap | 5.x |
+| Font Awesome | 6.x |
+| Karma/Jasmine | 6.4/5.6 |
+
+---
+
+## 🧪 Tests
 
 ```bash
-ng test
+# Lancer tous les tests
+npm test
+
+# Tests en mode CI (headless)
+npm test -- --no-watch --browsers=ChromeHeadless
+
+# Tests avec couverture
+npm test -- --code-coverage
 ```
 
-## Running end-to-end tests
+**Résultats actuels**: 85 tests ✅
 
-For end-to-end (e2e) testing, run:
+---
+
+## 📊 Métriques
+
+| Métrique | Valeur |
+|----------|--------|
+| Composants | 11 |
+| Tests | 85 (100% pass) |
+| Bundle (main.js) | 210 kB |
+| Bundle (styles.css) | 196 kB |
+
+---
+
+## 🚀 Build Production
 
 ```bash
-ng e2e
+# Créer le build de production
+npm run build
+
+# Les fichiers sont générés dans dist/yelfilal-angular/
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 📖 Documentation
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+La documentation complète est disponible dans le dossier `docs/` :
+
+- [Documentation principale](../DOCUMENTATION.md)
+- [État du projet](../docs/project-status.md)
+- [Architecture](../docs/brownfield-architecture.md)
+- [PRD](../docs/prd.md)
+
+---
+
+## 👤 Auteur
+
+**Yassine El FILALI** - Fullstack Developer
+
+- 💼 [LinkedIn](https://www.linkedin.com/in/yelfilal)
+- 🐙 [GitHub](https://github.com/yelfilal)
+
+---
+
+## 📄 License
+
+Ce projet est privé - Tous droits réservés.

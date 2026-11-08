@@ -34,26 +34,54 @@ describe('CvDataService', () => {
 
       expect(personal.firstName).toBe('Yassine');
       expect(personal.lastName).toBe('El FILALI');
-      expect(personal.title).toBe('FULLSTACK DEVELOPER');
+      expect(personal.title).toBe('Java Fullstack Engineer');
       expect(personal.profileImage).toBe('./img/profile.jpg');
     });
 
-    it('should return social links', () => {
+    it('should return the e-mail address', () => {
+      expect(service.getPersonalInfo().email).toBe('yelfilal.ict@ik.me');
+    });
+
+    it('should return the headline split around the highlighted words', () => {
+      const { headline } = service.getPersonalInfo();
+      const full = headline.lead + headline.highlight + headline.trail;
+
+      expect(headline.highlight).toBe('répondent efficacement');
+      expect(full).toBe('Des applications qui répondent efficacement aux besoins des utilisateurs.');
+    });
+
+    it('should return two intro paragraphs', () => {
+      const { intro } = service.getPersonalInfo();
+
+      expect(intro.length).toBe(2);
+      expect(intro[0]).toContain('Angular et Spring Boot');
+    });
+
+    it('should return the photo caption', () => {
+      const { photoCaption } = service.getPersonalInfo();
+
+      expect(photoCaption.label).toBe('ONEM · détaché par SMALS');
+      expect(photoCaption.since).toBe('Depuis juillet 2022');
+    });
+
+    it('should return social links with icon names', () => {
       const personal = service.getPersonalInfo();
 
-      expect(personal.socialLinks).toBeTruthy();
       expect(personal.socialLinks.length).toBe(2);
       expect(personal.socialLinks[0].platform).toBe('LinkedIn');
+      expect(personal.socialLinks[0].icon).toBe('linkedin');
       expect(personal.socialLinks[1].platform).toBe('GitHub');
+      expect(personal.socialLinks[1].icon).toBe('github');
+    });
+
+    it('should keep asset paths relative (GitHub Pages)', () => {
+      expect(service.getPersonalInfo().profileImage.startsWith('/')).toBeFalse();
     });
   });
 
   describe('getExperiences', () => {
     it('should return 3 professional experiences', () => {
-      const experiences = service.getExperiences();
-
-      expect(experiences).toBeTruthy();
-      expect(experiences.length).toBe(3);
+      expect(service.getExperiences().length).toBe(3);
     });
 
     it('should return experiences in correct order (antichronological)', () => {
@@ -64,36 +92,56 @@ describe('CvDataService', () => {
       expect(experiences[1].company).toContain('Province de Hainaut');
       expect(experiences[2].company).toContain('AXEL');
     });
+
+    it('should use the corrected labels', () => {
+      const experiences = service.getExperiences();
+
+      expect(experiences[0].type).toBe('Temps plein · détaché par SMALS');
+      expect(experiences[2].position).toBe('Fullstack Developer');
+      expect(experiences[2].responsibilities[0]).toContain('Onyx, un outil');
+    });
   });
 
   describe('getEducation', () => {
-    it('should return 2 academic formations', () => {
-      const education = service.getEducation();
-
-      expect(education).toBeTruthy();
-      expect(education.length).toBe(2);
+    it('should return 3 academic formations', () => {
+      expect(service.getEducation().length).toBe(3);
     });
 
     it('should return education with correct institutions', () => {
       const education = service.getEducation();
 
-      expect(education[0].institution).toContain('HELHa');
+      expect(education[0].institution).toContain('Condorcet');
       expect(education[0].distinction).toBe('Distinction');
-      expect(education[1].institution).toContain('IJJ');
+      expect(education[1].institution).toContain('HELHa');
+      expect(education[1].distinction).toBe('Distinction');
+      expect(education[2].institution).toContain('IJJ');
+      expect(education[2].distinction).toBeUndefined();
     });
   });
 
   describe('getSkills', () => {
-    it('should return skill categories', () => {
-      const skills = service.getSkills();
+    it('should return 6 skill categories in the expected order', () => {
+      const categories = service.getSkills().map(s => s.category);
 
-      expect(skills).toBeTruthy();
-      expect(skills.length).toBe(9);
+      expect(categories).toEqual([
+        'Frontend',
+        'Backend',
+        'Bases de données',
+        'DevOps & outillage',
+        'Qualité & conception',
+        'Agilité & gestion de projet'
+      ]);
+    });
+
+    it('should keep every skill after regrouping, without duplicates', () => {
+      const all = service.getSkills().flatMap(s => s.skills);
+
+      expect(all.length).toBe(38);
+      expect(new Set(all).size).toBe(all.length);
     });
 
     it('should include Frontend category', () => {
-      const skills = service.getSkills();
-      const frontend = skills.find(s => s.category === 'Frontend');
+      const frontend = service.getSkills().find(s => s.category === 'Frontend');
 
       expect(frontend).toBeTruthy();
       expect(frontend!.skills).toContain('Angular 2+');
@@ -101,40 +149,47 @@ describe('CvDataService', () => {
   });
 
   describe('getInterests', () => {
-    it('should return interests text', () => {
+    it('should return the 3 interests with their icons', () => {
       const interests = service.getInterests();
 
-      expect(interests).toBeTruthy();
-      expect(typeof interests).toBe('string');
-      expect(interests.length).toBeGreaterThan(0);
+      expect(interests.map(i => i.title)).toEqual(['Lecture', 'Football', 'Technologie']);
+      expect(interests.map(i => i.icon)).toEqual(['book', 'ball', 'chip']);
+      interests.forEach(interest => expect(interest.text.length).toBeGreaterThan(0));
     });
   });
 
   describe('getAwards', () => {
     it('should return 9 certifications', () => {
-      const awards = service.getAwards();
-
-      expect(awards).toBeTruthy();
-      expect(awards.length).toBe(9);
+      expect(service.getAwards().length).toBe(9);
     });
 
-    it('should return awards with valid URLs', () => {
-      const awards = service.getAwards();
-
-      awards.forEach(award => {
+    it('should return awards with a name, an issuer and a URL', () => {
+      service.getAwards().forEach(award => {
         expect(award.name).toBeTruthy();
-        expect(award.url).toBeTruthy();
+        expect(award.issuer).toBeTruthy();
         expect(award.url.length).toBeGreaterThan(0);
       });
     });
 
+    it('should set the expected issuers', () => {
+      const issuers = service.getAwards().map(a => a.issuer);
+
+      expect(issuers.slice(0, 7).every(i => i === 'Sololearn')).toBeTrue();
+      expect(issuers[7]).toBe('MOOC.fi');
+      expect(issuers[8]).toBe('Google');
+    });
+
+    it('should keep the Google certificate path relative', () => {
+      const google = service.getAwards().find(a => a.issuer === 'Google');
+
+      expect(google!.url).toBe('./certif/google_certificat_marketing.pdf');
+    });
+
     it('should include Angular certification', () => {
-      const awards = service.getAwards();
-      const angular = awards.find(a => a.name === 'Angular');
+      const angular = service.getAwards().find(a => a.name === 'Angular');
 
       expect(angular).toBeTruthy();
       expect(angular!.url).toContain('sololearn.com');
     });
   });
 });
-

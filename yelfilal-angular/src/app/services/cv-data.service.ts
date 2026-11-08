@@ -5,7 +5,8 @@ import {
   Experience,
   Education,
   SkillCategory,
-  Award
+  Award,
+  Interest
 } from '../models/cv-data.model';
 import { cvData } from '../data/cv-data';
 
@@ -13,8 +14,6 @@ import { cvData } from '../data/cv-data';
   providedIn: 'root'
 })
 export class CvDataService {
-  constructor() { }
-
   getCVData(): CVData {
     return cvData;
   }
@@ -35,7 +34,7 @@ export class CvDataService {
     return cvData.skills;
   }
 
-  getInterests(): string {
+  getInterests(): Interest[] {
     return cvData.interests;
   }
 
@@ -43,4 +42,3 @@ export class CvDataService {
     return cvData.awards;
   }
 }
-

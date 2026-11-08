@@ -1,12 +1,39 @@
-/**
- * Styles spécifiques au InterestsComponent
- */
+:host {
+  display: block;
+}
 
-.interests-card {
-    max-width: 42rem;
+.interests-section {
+  padding-block: clamp(48px, 5vw, 72px) 32px;
+}
 
-    p {
-        font-size: 1.05rem;
-        line-height: 1.8;
-    }
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.interest-card {
+  flex: 1 1 300px;
+  padding: 32px;
+}
+
+.interest-card__tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+}
+
+.interest-card__title {
+  margin-bottom: 8px;
+  font-size: 22px;
+}
+
+.interest-card__text {
+  color: var(--color-text-2);
 }

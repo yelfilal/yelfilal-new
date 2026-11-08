@@ -1,0 +1,19 @@
+<section class="section contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="contact" appScrollAnimation>
+    <h2 class="contact__title" id="contact-title">Envie d'échanger&nbsp;?<br />Restons en contact.</h2>
+
+    <div class="contact__actions">
+      <a class="btn contact__mail" [href]="'mailto:' + personalInfo.email">
+        <app-icon name="mail" [size]="18" />
+        {{ personalInfo.email }}
+      </a>
+
+      @for (link of personalInfo.socialLinks; track link.platform) {
+        <a class="btn contact__link" [href]="link.url" target="_blank" rel="noopener noreferrer">
+          {{ link.platform }}
+          <app-icon name="arrow-up-right" [size]="16" />
+        </a>
+      }
+    </div>
+  </div>
+</section>

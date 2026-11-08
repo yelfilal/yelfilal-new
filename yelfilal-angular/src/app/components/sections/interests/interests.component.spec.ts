@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InterestsComponent } from './interests.component';
-import { CvDataService } from '../../../services/cv-data.service';
 
 describe('InterestsComponent', () => {
   let component: InterestsComponent;
   let fixture: ComponentFixture<InterestsComponent>;
+  let compiled: HTMLElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InterestsComponent],
-      providers: [CvDataService]
+      imports: [InterestsComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(InterestsComponent);
     component = fixture.componentInstance;
+    compiled = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
   });
 
@@ -21,35 +21,26 @@ describe('InterestsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve interests from service', () => {
-    expect(component.interests).toBeTruthy();
-    expect(typeof component.interests).toBe('string');
+  it('should retrieve 3 interests from service', () => {
+    expect(component.interests.length).toBe(3);
   });
 
-  it('should display interests text', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const paragraph = compiled.querySelector('p');
+  it('should render one card per interest with its title and text', () => {
+    const cards = compiled.querySelectorAll('.interest-card');
 
-    expect(paragraph).toBeTruthy();
-    expect(paragraph?.textContent?.trim()).toBe(component.interests);
+    expect(cards.length).toBe(3);
+    cards.forEach((card, i) => {
+      expect(card.querySelector('h3')?.textContent?.trim()).toBe(component.interests[i].title);
+      expect(card.querySelector('p')?.textContent?.trim()).toBe(component.interests[i].text);
+      expect(card.querySelector('.interest-card__tile svg')).toBeTruthy();
+    });
   });
 
   it('should have correct section id', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const section = compiled.querySelector('section');
-    expect(section?.id).toBe('interests');
-  });
-
-  it('should have resume-section class', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const section = compiled.querySelector('section');
-    expect(section?.classList.contains('resume-section')).toBeTrue();
+    expect(compiled.querySelector('section')?.id).toBe('interests');
   });
 
   it('should have section title', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const title = compiled.querySelector('h2');
-    expect(title?.textContent).toContain("Centres d'intérêt");
+    expect(compiled.querySelector('h2')?.textContent).toBe('Centres d\'intérêt');
   });
 });
-

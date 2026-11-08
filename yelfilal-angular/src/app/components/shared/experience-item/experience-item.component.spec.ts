@@ -3,8 +3,8 @@ import { ExperienceItemComponent } from './experience-item.component';
 import { Experience } from '../../../models/cv-data.model';
 
 describe('ExperienceItemComponent', () => {
-  let component: ExperienceItemComponent;
   let fixture: ComponentFixture<ExperienceItemComponent>;
+  let compiled: HTMLElement;
 
   const mockExperience: Experience = {
     position: 'Fullstack Developer',
@@ -22,44 +22,38 @@ describe('ExperienceItemComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExperienceItemComponent);
-    component = fixture.componentInstance;
-    component.experience = mockExperience;
+    fixture.componentRef.setInput('experience', mockExperience);
+    compiled = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should display position', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const heading = compiled.querySelector('h3');
-    expect(heading?.textContent?.trim()).toBe(mockExperience.position);
+  it('should display the dates separated by an em dash', () => {
+    expect(compiled.querySelector('.exp-card__dates')?.textContent?.trim()).toBe('Juillet 2022 — Présent');
   });
 
-  it('should display company', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const subheading = compiled.querySelector('.subheading');
-    expect(subheading?.textContent?.trim()).toBe(mockExperience.company);
+  it('should display position as h3', () => {
+    expect(compiled.querySelector('h3')?.textContent?.trim()).toBe('Fullstack Developer');
   });
 
-  it('should display dates', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const dates = compiled.querySelector('.text-primary');
-    expect(dates?.textContent).toContain(mockExperience.startDate);
-    expect(dates?.textContent).toContain(mockExperience.endDate);
+  it('should display the contract type', () => {
+    expect(compiled.querySelector('.exp-card__type')?.textContent?.trim()).toBe('Temps plein');
   });
 
-  it('should display responsibilities', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
+  it('should display company and location', () => {
+    expect(compiled.querySelector('.exp-card__company')?.textContent?.trim()).toBe('ONEM · Bruxelles');
+  });
+
+  it('should display responsibilities with decorative diamonds', () => {
     const items = compiled.querySelectorAll('ul li');
     expect(items.length).toBe(2);
+    items.forEach(item => expect(item.querySelector('.diamond')?.getAttribute('aria-hidden')).toBe('true'));
   });
 
-  it('should display location and type', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Bruxelles');
-    expect(compiled.textContent).toContain('Temps plein');
+  it('should hide the timeline rail from assistive technologies', () => {
+    expect(compiled.querySelector('.rail')?.getAttribute('aria-hidden')).toBe('true');
   });
 });
-

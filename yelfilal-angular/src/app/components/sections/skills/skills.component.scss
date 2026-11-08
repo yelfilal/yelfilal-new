@@ -1,9 +1,50 @@
-/**
- * Styles spécifiques au SkillsComponent
- */
+:host {
+  display: block;
+}
 
-.skill-badges-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+// 3 colonnes à 1200px, puis 2, puis 1
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 20px;
+}
+
+.skill-card {
+  padding: 28px;
+}
+
+.skill-card__title {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-divider);
+  font-size: 21px; // interligne hérité (1.65), comme la maquette
+  letter-spacing: -0.01em;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-chip-border);
+  border-radius: 12px;
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-text);
 }

@@ -1,12 +1,9 @@
-<section class="resume-section" id="education" aria-labelledby="education-title">
-  <div class="resume-section-content">
-    <h2 class="mb-5" id="education-title" appScrollAnimation>Formation</h2>
+<section class="section" id="education" aria-labelledby="education-title">
+  <h2 class="section__title" id="education-title" appScrollAnimation>Études</h2>
 
+  <div class="edu-list">
     @for (edu of education; track edu.institution; let i = $index) {
-      <div appScrollAnimation [animationDelay]="i * 100">
-        <app-education-item [education]="edu"></app-education-item>
-      </div>
+      <app-education-item [education]="edu" appScrollAnimation [animationDelay]="i * 100" />
     }
   </div>
 </section>
-

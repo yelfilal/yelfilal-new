@@ -1,21 +1,17 @@
-<section class="resume-section" id="skills" aria-labelledby="skills-title">
-  <div class="resume-section-content">
-    <h2 class="mb-5" id="skills-title" appScrollAnimation>Compétences</h2>
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <h2 class="section__title" id="skills-title" appScrollAnimation>Compétences</h2>
 
+  <div class="skills-grid">
     @for (category of skills; track category.category; let i = $index) {
-    <div class="mb-4" appScrollAnimation [animationDelay]="i * 100">
-      <!-- Nom catégorie si présent -->
-      @if (category.category) {
-      <div class="subheading mb-3">{{ category.category }}</div>
-      }
+      <div class="card skill-card" appScrollAnimation [animationDelay]="(i % 3) * 80">
+        <h3 class="skill-card__title">{{ category.category }}</h3>
 
-      <!-- Liste compétences en badges -->
-      <div class="skill-badges-container">
-        @for (skill of category.skills; track skill) {
-        <span class="skill-badge">{{ skill }}</span>
-        }
+        <ul class="chips">
+          @for (skill of category.skills; track skill) {
+            <li class="chip"><span class="chip__dot" aria-hidden="true"></span>{{ skill }}</li>
+          }
+        </ul>
       </div>
-    </div>
     }
   </div>
 </section>

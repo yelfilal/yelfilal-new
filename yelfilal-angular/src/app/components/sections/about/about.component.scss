@@ -1,8 +1,126 @@
-/**
- * Styles spécifiques au AboutComponent
- * Les styles principaux viennent de Bootstrap et styles.scss global
- */
+:host {
+  display: block;
+}
 
-// Pas de styles additionnels nécessaires
-// Tout géré par Bootstrap et classes CSS existantes
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 64px;
+  padding-block: clamp(56px, 5.5vw, 80px) clamp(48px, 5vw, 72px);
+}
 
+.hero__text {
+  flex: 999 1 520px;
+  min-width: 0;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-accent-border);
+  border-radius: 999px;
+  background: var(--color-accent-soft);
+  color: var(--color-accent-text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.hero__title {
+  max-width: 760px;
+  margin-bottom: 32px;
+  font-size: clamp(40px, 4.8vw, 68px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+.hero__highlight {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--color-accent-text);
+}
+
+.hero__intro {
+  max-width: 600px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text-2);
+
+  &:last-of-type {
+    margin-bottom: 40px;
+  }
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero__cta {
+  padding: 14px 24px;
+}
+
+.hero__social {
+  width: 52px;
+  height: 52px;
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  &:hover {
+    color: var(--color-accent-text);
+  }
+}
+
+// `content-box` comme la maquette : 320px de photo hors cadre
+.hero__photo {
+  box-sizing: content-box;
+  flex: 1 1 320px;
+  max-width: 440px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 32px;
+  background: var(--color-surface);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 22px;
+  }
+
+  figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px 12px;
+    padding: 16px 8px 4px;
+    font-size: 13px;
+    color: var(--color-text-3);
+  }
+}
+
+.hero__since {
+  font-weight: 600;
+  color: var(--color-accent-text);
+}
